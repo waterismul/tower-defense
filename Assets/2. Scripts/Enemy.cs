@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+public enum EnemyDestroyType{Kill,Arrive}
 public class Enemy : MonoBehaviour
 {
     private int wayPointCount;//이동 경로 개수
@@ -8,6 +9,7 @@ public class Enemy : MonoBehaviour
     private int currentIndex = 0;//현재 목표지점 인덱스
     private Movement2D movement2D;//오브젝트 이동 제어
     private EnemySpawner enemySpawner; //적의 삭제를 본인이 하지 않고 EnemySpawner에 알려서 삭제
+    [SerializeField] private int gold = 10;//적 사망시 획득 골드
 
     public void Setup(EnemySpawner enemySpawner, Transform[] wayPoints)
     {
@@ -64,13 +66,16 @@ public class Enemy : MonoBehaviour
         //현재 위치가 마지막 wayPoint이면
         else
         {
+            gold = 10; //목표지점에 도달해서 사망할 때는 돈을 주지 않도록
+            
             //적 오브젝트 삭제
-            OnDie();
+            OnDie(EnemyDestroyType.Arrive);
         }
     }
 
-    public void OnDie()
+    public void OnDie(EnemyDestroyType type)
     {
-        enemySpawner.DestroyEnemy(this);//EnemySpawner에서 리스트로 적 정보를 관리하기 때문에 EnemySpawner 본인이 필요한 처리를 하도록 호출
+        enemySpawner.DestroyEnemy(type, this, gold);//EnemySpawner에서 리스트로 적 정보를 관리하기 때문에 EnemySpawner 본인이 필요한 처리를 하도록 호출
+        
     }
 }
