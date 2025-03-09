@@ -6,6 +6,7 @@ using UnityEngine;
 public class TowerTemplate : ScriptableObject//싱글톤을 쓰긴 애매한데 데이터는 공유해야할때, 싱글톤과 달리 런타임시 변경된 데이터는 변경되지 않음.
 {
     public GameObject towerPrefab; //타워 생성을 위한 프리팹
+    public GameObject followTowerPrefab;//임시 타워 프리팹
     public Weapon[] weapon;//레벨별 타워(무기)정보
 
     [System.Serializable]
