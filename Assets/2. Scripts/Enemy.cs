@@ -57,10 +57,13 @@ public class Enemy : MonoBehaviour
         if(currentIndex < wayPointCount - 1)
         {
             //적의 위치를 정확하게 목표 위치로 설정
-            transform.position = wayPoints[currentIndex].position;
+            transform.position = wayPoints[currentIndex].position;//->하지 않으면 Movement2D에서 시간에 따라 위치가 변경되는데 틈이 생겨서 탈선함?
+            //*moveSpeed때문에 wayPoint의 위치가 딱 안맞아 떨어질 수 있기 때문
+            
             //이동방향 설정 => 다음 목표지점(wayPoints)
             currentIndex++;
             Vector3 direction = (wayPoints[currentIndex].position - transform.position).normalized;
+            //Debug.Log("위치: "+direction);
             movement2D.MoveTo(direction);
         }
         //현재 위치가 마지막 wayPoint이면

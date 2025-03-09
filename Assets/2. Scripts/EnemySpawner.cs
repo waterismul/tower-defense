@@ -15,14 +15,12 @@ public class EnemySpawner : MonoBehaviour
     private List<Enemy> enemyList;//맵에 존재하는 모든 적의 정보
 
     public List<Enemy> EnemyList => enemyList;
-
     public int CurrentEnemyCount => currentEnemyCount;//현재 웨이브에 남아있는 적, 최대 적 숫자
     public int MaxEnemyCount => currentWave.maxEnemyCount;
 
     private void Awake()
     {
         enemyList = new List<Enemy>();
-        
     }
 
     public void StartWave(Wave wave)
